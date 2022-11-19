@@ -1,6 +1,6 @@
 const pokedex = new Map();
 
-pokedex.set("picachu", {
+pokedex.set("pikachu", {
   hp: 3,
   attack: 3,
   defense: 3,
