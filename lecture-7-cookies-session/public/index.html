@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Our Amazing E-Commerce Site</title>
+    </head>
+    <body>
+        <input id="groceryItem" />
+        <button onclick="addGroceryItem()">Submit</button>
+        <ol id="groceryList"></ol>
+        <button onclick="deleteAllItems()">Delete all</button>
+    </body>
+    <script>
+        function addGroceryItem() {
+            fetch(`/grocery-list/item?value=${groceryItem.value}`, {
+                method: "POST",
+            })
+                .then((response) => {
+                    // console.log("response", response);
+
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("smokey2", data);
+
+                    groceryList.innerHTML = data
+                        .map((item) => `<li>${item}</li>`)
+                        .join("");
+                });
+        }
+
+        function deleteAllItems() {
+            fetch("/grocery-list", { method: "DELETE" });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("/grocery-list")
+                .then((res) => {
+                    return res.json();
+                })
+                .then((groceryListArray) => {
+                    groceryList.innerHTML = groceryListArray
+                        .map((item) => `<li>${item}</li>`)
+                        .join("");
+
+                    // alternatively, we could have done this :
+                    // const result = groceryListArray.reduce(
+                    //     (accumul, currentItem) => {
+                    //         return accumul + "<li>" + currentItem + "</li>";
+                    //     },
+                    //     ""
+                    // );
+                    // groceryList.innerHTML = result;
+                    // alternatively, we could have done this :
+                    // let str = "";
+                    // groceryListArray.forEach((item) => {
+                    //     str = str + "<li>" + item + "</li>";
+                    // });
+                    // groceryList.innerHTML = str;
+                    // alternatively, we could have done this :
+                    // let str = "";
+                    // for (let item of groceryListArray) {
+                    //     str = str + "<li>" + item + "</li>";
+                    // }
+                    // groceryList.innerHTML = str;
+                    // for (let i = 0; i < groceryListArray.length; i++) {
+                    // }
+                });
+        });
+    </script>
+</html>
