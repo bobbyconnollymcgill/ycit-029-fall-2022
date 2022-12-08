@@ -2,12 +2,13 @@ const express = require("express");
 
 const app = express();
 
-app.post("/callback-url", (req, res) => {
-  console.log("a webhook was received");
+app.post("/event", (req, res) => {
+    // log the ip address of the request
+    console.log("a webhook was received", req.ip);
 
-  res.end();
+    res.end();
 });
 
-app.listen(4444, () => {
-  console.log("listening on port 4444");
+app.listen(3005, () => {
+    console.log("listening on port 3005");
 });
