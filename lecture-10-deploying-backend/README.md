@@ -1,4 +1,6 @@
-docker build -t taco . docker run -p 3000:3000 taco
+docker build -t taco .
+
+docker run -p 3000:3000 taco
 
 gcloud auth login
 
