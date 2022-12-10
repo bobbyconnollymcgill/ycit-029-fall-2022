@@ -1,5 +1,11 @@
 const express = require("express")
 
+// let PORT = 3000
+// if (process.env.PORT) {
+//     PORT = process.env.PORT
+// }
+
+// Using the short-circuiting operator || is syntactic sugar for the code above
 const PORT = process.env.PORT || 3000
 
 const ingredientsDatabase = require("./ingredientsDatabase")
@@ -11,7 +17,8 @@ app.set("view engine", "ejs")
 // This is a middleware function that will be called for every request
 // and logs the method and url of the request
 app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`)
+    console.log(`incomming request: ${req.method} ${req.url}`)
+
     next()
 })
 
